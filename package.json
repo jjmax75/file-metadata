@@ -1,0 +1,39 @@
+{
+  "name": "jjmax-file-metadata",
+  "version": "1.0.0",
+  "description": "A simple API that returns an alert with the size of a file",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js",
+    "debug": "nodemon --debug server.js",
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jjmax75/file-metadata"
+  },
+  "homepage": "https://whispering-waters-22441.herokuapp.com/",
+  "bugs": "https://github.com/jjmax75/file-metadata/issues",
+  "keywords": [
+    "MEAN",
+    "Express",
+    "Node",
+    "Javascript",
+    "multer",
+    "API"
+  ],
+  "author": "Sean Behan",
+  "license": "MIT",
+  "dependencies": {
+    "express": "4.12.4",
+    "multer": "1.1.0"
+  },
+  "engines": {
+    "node": "4.4.0"
+  },
+  "devDependencies": {
+    "chai": "3.5.0",
+    "chai-http": "2.0.1"
+  }
+}
