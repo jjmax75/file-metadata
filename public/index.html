@@ -5,8 +5,11 @@
     <title>File Metadata Microservice by Se&aacute;n Behan</title>
     <meta name="description" content="A simple File Metadata Microservice that returns the file size">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <link href="/public/css/normalize.css" rel="stylesheet" media="all">
     <link href="/public/css/styles.css" rel="stylesheet" media="all">
+
+    <script src="//code.jquery.com/jquery-1.12.0.min.js"></script>
     <!--[if lt IE 9]><script src="/public/js/html5shiv-printshiv.js" media="all"></script><![endif]-->
 </head>
 <body>
@@ -29,12 +32,54 @@
             <li>User Story 2: When I submit something, I will receive the file size in bytes within the JSON response</li>
           </ul>
 
+          <form id="sendFile" enctype="multipart/form-data">
+            <label for="sentFile">Check a file's size</label>
+            <input type="file" name="sentFile" id="sentFile">
+            <input type="submit" value="Check File Size">
+          </form>
+
         </main>
     </div>
 
     <footer role="contentinfo">
         <small>Copyright &copy; Se&aacute;n Behan <time datetime="2016">2016</time></small>
     </footer>
+
+    <script>
+      $(document).ready(function() {
+
+        var files = [];
+        var data = new FormData();
+
+        $('input[type=file]').on('change', function(event) {
+          files = event.target.files;
+        });
+
+        $('form').on('submit', function(event) {
+
+          event.stopPropagation();
+          event.preventDefault();
+
+          data.append('sentFile', files[0]);
+
+          $.ajax({
+            url: window.location.origin + '/api/getFileSize/',
+            type: 'POST',
+            data: data,
+            cache: false,
+            processData: false,
+            contentType: false,
+            error: function(jqXHR, textStatus, errorThrown) {
+              alert('Errors: ' + textStatus + ': ' + errorThrown);
+            },
+            success: function(data) {
+              alert('File Size: ' + data)
+            }
+          });
+
+        });
+      });
+    </script>
 
 </body>
 </html>
